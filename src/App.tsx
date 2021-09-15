@@ -4,7 +4,7 @@ import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 
 import Links from './pages/Links';
 import Login from './pages/Login';
-import Product from './pages/products/Product';
+import ProductForm from './pages/products/ProductForm';
 import Products from './pages/products/Products';
 import React from 'react';
 import { RedirectToUsers } from './components/RedirectToUsers';
@@ -19,7 +19,7 @@ function App() {
         {/* <Redirect from='/' exact to='/users' /> */}
         <Route path={'/users'} exact component={Users}></Route>
         <Route path={'/products'} exact component={Products}></Route>
-        <Route path={'/products/:id'} component={Product}></Route>
+        <Route path={'/products/:id'} component={ProductForm}></Route>
         <Route path={'/login'} component={Login}></Route>
         <Route path={'/register'} component={Register}></Route>
         <Route path={'/users/:id/links'} component={Links}></Route>

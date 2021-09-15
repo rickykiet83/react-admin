@@ -32,7 +32,7 @@ export default function Products() {
     setPage(newPage);
   };
 
-  const deleteProduct = async (id: number) => {
+  const deleteProduct = async (id: number | null) => {
     if (window.confirm('Are you sure?')) {
       await axios.delete(`products/${id}`);
       setProducts(products.filter((p) => p.id !== id));
@@ -52,6 +52,9 @@ export default function Products() {
         <h1 className='h2'>Products</h1>
       </div>
       <h2>Product List</h2>
+      <Button href='/products/create' variant='contained' color='primary'>
+        Add New
+      </Button>
       <Table>
         <TableHead>
           <TableRow>
@@ -82,6 +85,13 @@ export default function Products() {
                   <TableCell>{product.description}</TableCell>
                   <TableCell>{product.price}</TableCell>
                   <TableCell>
+                    <Button
+                      onClick={() => deleteProduct(product.id)}
+                      variant='contained'
+                      color='primary'
+                    >
+                      View
+                    </Button>
                     <Button
                       onClick={() => deleteProduct(product.id)}
                       variant='contained'
