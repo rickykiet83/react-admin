@@ -1,19 +1,15 @@
 import { Button, TextField, TextareaAutosize } from '@material-ui/core';
+import { IProduct, ProductState } from '../../models/product.model';
 import React, { Component, SyntheticEvent } from 'react';
 
+import { FormState } from '../../models/form.state';
 import { IValues } from '../../models/base.model';
 import { Layout } from '../../components/Layout';
-import { Product } from '../../models/product.model';
 import { Redirect } from 'react-router';
 import axios from 'axios';
 
-type State = {
-  data: Product;
-  submitSuccess: boolean;
-};
-
 export default class ProductForm extends Component {
-  state: State = {
+  state: FormState<IProduct> = {
     data: {
       id: null,
       title: '',

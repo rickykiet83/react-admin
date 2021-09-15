@@ -1,8 +1,8 @@
+import { IProduct, ProductState } from '../../models/product.model';
 import React, { useEffect, useState } from 'react';
 
 import { Button } from '@material-ui/core';
 import { Layout } from '../../components/Layout';
-import { Product } from '../../models/product.model';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,7 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import axios from 'axios';
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
 
   const [page, setPage] = useState(0);
   const [perPage, setRowsPerPage] = useState(10);
