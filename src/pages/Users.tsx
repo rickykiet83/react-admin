@@ -4,7 +4,9 @@ import { Layout } from '../components/Layout';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
+import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { User } from '../models/user.model';
 import axios from 'axios';
@@ -12,6 +14,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
+  const [page, setPage] = useState(0);
+  const [perPage, setRowsPerPage] = useState(10);
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   useEffect(() => {
     (async () => {
@@ -35,7 +46,7 @@ export default function Users() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => {
+          {users.slice(page * perPage, (page + 1) * perPage).map((user) => {
             return (
               <TableRow key={user.id}>
                 <TableCell>{user.id}</TableCell>
@@ -48,6 +59,16 @@ export default function Users() {
             );
           })}
         </TableBody>
+        <TableFooter>
+          <TablePagination
+            count={users.length}
+            page={page}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            onPageChange={(e, newPage) => setPage(newPage)}
+            rowsPerPage={perPage}
+            rowsPerPageOptions={[5, 10, 25]}
+          />
+        </TableFooter>
       </Table>
     </Layout>
   );
