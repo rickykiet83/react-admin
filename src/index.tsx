@@ -1,9 +1,14 @@
+import './index.css';
+
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import axios from 'axios';
+import config from './config.json';
 import reportWebVitals from './reportWebVitals';
 
+axios.defaults.baseURL = config.apiUr;
+axios.defaults.withCredentials = true;
 ReactDOM.render(
   <React.StrictMode>
     <App />
