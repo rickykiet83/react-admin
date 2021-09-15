@@ -31,8 +31,8 @@ export default function Nav(props: { user: User | null }) {
               </a>
             </li>
             <li>
-              <a href='#' className='nav-link px-2 text-white'>
-                FAQs
+              <a href='/orders' className='nav-link px-2 text-white'>
+                Orders
               </a>
             </li>
             <li>

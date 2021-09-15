@@ -51,15 +51,15 @@ export default class ProductForm extends Component<RouteComponentProps<any>> {
     e.preventDefault();
     const productId = this.state.data.id;
     if (productId) {
-      const response = await axios.put(
+      const { status } = await axios.put(
         `/products/${productId}`,
         this.state.data
       );
-      if (response.status === 202) this.setState({ submitSuccess: true });
+      if (status === 202) this.setState({ submitSuccess: true });
     } else {
-      const response = await axios.post('products', this.state.data);
+      const { status } = await axios.post('products', this.state.data);
 
-      if (response.status === 201) this.setState({ submitSuccess: true });
+      if (status === 201) this.setState({ submitSuccess: true });
     }
   };
 
