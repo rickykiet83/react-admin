@@ -1,6 +1,15 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
+import { User } from './../models/user.model';
+import axios from 'axios';
 
-export default function Nav() {
+export default function Nav(props: { user: User | null }) {
+  const { user } = props;
+
+  const logout = async () => {
+    axios.post('logout');
+  };
+
   return (
     <header className='p-3 bg-dark text-white'>
       <div className='container'>
@@ -60,11 +69,43 @@ export default function Nav() {
               type='button'
               className='btn btn-outline-light me-2'
             >
-              Login
+              {user?.email}
             </a>
-            <a href='/register' type='button' className='btn btn-warning'>
-              Sign-up
+            <a
+              href='/profile'
+              type='button'
+              className='btn btn-outline-light me-2'
+            >
+              Profile
             </a>
+            <Link
+              onClick={logout}
+              type='button'
+              className='btn btn-outline-light me-2'
+              to={'login'}
+            >
+              Logout
+            </Link>
+            {!user && (
+              <>
+                (
+                <a
+                  href='/login'
+                  type='button'
+                  className='btn btn-outline-light me-2'
+                >
+                  Login
+                </a>
+                <a
+                  href='/register'
+                  type='button'
+                  className='btn btn-warning me-2'
+                >
+                  Sign-up
+                </a>
+                )
+              </>
+            )}
           </div>
         </div>
       </div>

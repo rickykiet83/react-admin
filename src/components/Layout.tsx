@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 
 import Nav from './Nav';
 import { Redirect } from 'react-router';
+import { User } from '../models/user.model';
 import axios from 'axios';
 
 export const Layout = (props: any) => {
   const [redirect, setRedirect] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
   useEffect(() => {
     (async () => {
       try {
         const { data } = await axios.get('user');
+        setUser(data);
       } catch (error) {
         setRedirect(true);
       }
@@ -22,7 +26,7 @@ export const Layout = (props: any) => {
 
   return (
     <div>
-      <Nav />
+      <Nav user={user} />
       <div className='container-fluid'>
         <div className='row'>
           <main className='col-md-9 ms-sm-auto col-lg-10 px-md-4'>
