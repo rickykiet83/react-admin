@@ -1,7 +1,7 @@
-import { IProduct, ProductState } from '../../models/product.model';
 import React, { useEffect, useState } from 'react';
 
 import { Button } from '@material-ui/core';
+import { IProduct } from '../../models/product.model';
 import { Layout } from '../../components/Layout';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

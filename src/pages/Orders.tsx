@@ -9,7 +9,6 @@ import { IOrder } from '../models/order.model';
 import { Layout } from '../components/Layout';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
-import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 
 export default function Orders() {

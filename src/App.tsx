@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Orders from './pages/Orders';
 import ProductForm from './pages/products/ProductForm';
 import Products from './pages/products/Products';
+import Profile from './pages/Profile';
 import React from 'react';
 import { RedirectToUsers } from './components/RedirectToUsers';
 import Register from './pages/Register';
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' exact component={RedirectToUsers} />
         {/* <Redirect from='/' exact to='/users' /> */}
         <Route path={'/users'} exact component={Users}></Route>
+        <Route path={'/profile'} exact component={Profile}></Route>
         <Route path={'/products'} exact component={Products}></Route>
         <Route path={'/products/:id'} component={ProductForm}></Route>
         <Route path={'/orders'} component={Orders}></Route>

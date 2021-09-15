@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Button from '@material-ui/core/Button';
+import { IUser } from '../models/user.model';
 import { Layout } from '../components/Layout';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,11 +10,10 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { User } from '../models/user.model';
 import axios from 'axios';
 
 export default function Users() {
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
   const [page, setPage] = useState(0);
   const [perPage, setRowsPerPage] = useState(10);
 

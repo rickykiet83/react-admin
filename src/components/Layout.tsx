@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
+import { IUser } from '../models/user.model';
 import Nav from './Nav';
 import { Redirect } from 'react-router';
-import { User } from '../models/user.model';
 import axios from 'axios';
 
 export const Layout = (props: any) => {
   const [redirect, setRedirect] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
     (async () => {

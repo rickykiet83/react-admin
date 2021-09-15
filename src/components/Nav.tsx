@@ -1,9 +1,9 @@
+import { IUser } from './../models/user.model';
 import { Link } from 'react-router-dom';
 import React from 'react';
-import { User } from './../models/user.model';
 import axios from 'axios';
 
-export default function Nav(props: { user: User | null }) {
+export default function Nav(props: { user: IUser | null }) {
   const { user } = props;
 
   const logout = async () => {
