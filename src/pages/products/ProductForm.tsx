@@ -1,14 +1,14 @@
 import { Button, TextField, TextareaAutosize } from '@material-ui/core';
-import { IProduct, ProductState } from '../../models/product.model';
 import React, { Component, SyntheticEvent } from 'react';
+import { Redirect, RouteComponentProps } from 'react-router';
 
 import { FormState } from '../../models/form.state';
+import { IProduct } from '../../models/product.model';
 import { IValues } from '../../models/base.model';
 import { Layout } from '../../components/Layout';
-import { Redirect } from 'react-router';
 import axios from 'axios';
 
-export default class ProductForm extends Component {
+export default class ProductForm extends Component<RouteComponentProps<any>> {
   state: FormState<IProduct> = {
     data: {
       id: null,
@@ -19,6 +19,20 @@ export default class ProductForm extends Component {
     },
     submitSuccess: false,
   };
+
+  async componentDidMount() {
+    await this.populateProduct();
+  }
+
+  async populateProduct() {
+    try {
+      const productId = this.props.match.params.id;
+      if (productId === 'create') return;
+      const { data } = await axios.get(`/products/${productId}`);
+
+      this.setValues(data);
+    } catch (error) {}
+  }
 
   private setValues = (values: IValues) => {
     this.setState({ data: { ...this.state.data, ...values } });
@@ -35,16 +49,25 @@ export default class ProductForm extends Component {
 
   submit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    const response = await axios.post('products', this.state.data);
-    console.log(response);
+    const productId = this.state.data.id;
+    if (productId) {
+      const response = await axios.put(
+        `/products/${productId}`,
+        this.state.data
+      );
+      if (response.status === 202) this.setState({ submitSuccess: true });
+    } else {
+      const response = await axios.post('products', this.state.data);
 
-    if (response.status === 201) this.setState({ submitSuccess: true });
+      if (response.status === 201) this.setState({ submitSuccess: true });
+    }
   };
 
   render() {
     if (this.state.submitSuccess) {
       return <Redirect to='/products' />;
     }
+    const { title, description, image, price } = this.state.data;
     return (
       <Layout>
         <form>
@@ -52,6 +75,7 @@ export default class ProductForm extends Component {
             <TextField
               id='title'
               label='Title'
+              value={title}
               onChange={(e) => this.handleInputChanges(e)}
             />
           </div>
@@ -59,6 +83,7 @@ export default class ProductForm extends Component {
             <TextareaAutosize
               onChange={(e) => this.handleInputChanges(e)}
               name='description'
+              value={description}
               placeholder='Description'
               minRows={4}
             />
@@ -66,6 +91,7 @@ export default class ProductForm extends Component {
           <div className='mb-3'>
             <TextField
               name='image'
+              value={image}
               onChange={(e) => this.handleInputChanges(e)}
               label='Image'
             />
@@ -73,6 +99,7 @@ export default class ProductForm extends Component {
           <div className='mb-3'>
             <TextField
               name='price'
+              value={price}
               onChange={(e) => this.handleInputChanges(e)}
               label='Price'
             />

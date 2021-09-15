@@ -10,6 +10,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 import axios from 'axios';
 
 export default function Products() {
@@ -85,20 +86,23 @@ export default function Products() {
                   <TableCell>{product.description}</TableCell>
                   <TableCell>{product.price}</TableCell>
                   <TableCell>
-                    <Button
-                      onClick={() => deleteProduct(product.id)}
-                      variant='contained'
-                      color='primary'
-                    >
-                      View
-                    </Button>
-                    <Button
-                      onClick={() => deleteProduct(product.id)}
-                      variant='contained'
-                      color='secondary'
-                    >
-                      Delete
-                    </Button>
+                    <ToggleButton>
+                      <Button
+                        href={`/products/${product.id}`}
+                        variant='contained'
+                        color='primary'
+                        className='me-2'
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        onClick={() => deleteProduct(product.id)}
+                        variant='contained'
+                        color='secondary'
+                      >
+                        Delete
+                      </Button>
+                    </ToggleButton>
                   </TableCell>
                 </TableRow>
               );
