@@ -26,8 +26,8 @@ export default function Nav(props: { user: User | null }) {
               </a>
             </li>
             <li>
-              <a href='#' className='nav-link px-2 text-white'>
-                Pricing
+              <a href='/products' className='nav-link px-2 text-white'>
+                Products
               </a>
             </li>
             <li>

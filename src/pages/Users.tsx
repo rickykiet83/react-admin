@@ -24,6 +24,13 @@ export default function Users() {
     setPage(0);
   };
 
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
   useEffect(() => {
     (async () => {
       const { data } = await axios.get('ambassadors');
@@ -72,7 +79,7 @@ export default function Users() {
             count={users.length}
             page={page}
             onRowsPerPageChange={handleChangeRowsPerPage}
-            onPageChange={(e, newPage) => setPage(newPage)}
+            onPageChange={handleChangePage}
             rowsPerPage={perPage}
             rowsPerPageOptions={[5, 10, 25]}
           />

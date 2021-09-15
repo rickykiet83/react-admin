@@ -5,9 +5,7 @@ import { Link } from '../models/link.model';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableFooter from '@material-ui/core/TableFooter';
 import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import axios from 'axios';
 
@@ -54,15 +52,6 @@ export default function Links(props: any) {
             );
           })}
         </TableBody>
-        <TableFooter>
-          <TablePagination
-            count={links.length}
-            page={page}
-            onPageChange={(e, newPage) => setPage(newPage)}
-            rowsPerPage={perPage}
-            rowsPerPageOptions={[]}
-          />
-        </TableFooter>
       </Table>
     </Layout>
   );
