@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import Button from '@material-ui/core/Button';
 import { Layout } from '../components/Layout';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,7 +11,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { User } from '../models/user.model';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
@@ -39,10 +39,10 @@ export default function Users() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell scope='col'>#</TableCell>
-            <TableCell scope='col'>Name</TableCell>
-            <TableCell scope='col'>Email</TableCell>
-            <TableCell scope='col'>Actions</TableCell>
+            <TableCell>#</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Email</TableCell>
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,7 +54,15 @@ export default function Users() {
                   {user.first_name} {user.last_name}
                 </TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell></TableCell>
+                <TableCell>
+                  <Button
+                    href={`users/${user.id}/links`}
+                    variant='contained'
+                    color='primary'
+                  >
+                    View
+                  </Button>
+                </TableCell>
               </TableRow>
             );
           })}

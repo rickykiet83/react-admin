@@ -21,8 +21,8 @@ export default function Nav(props: { user: User | null }) {
               </a>
             </li>
             <li>
-              <a href='#' className='nav-link px-2 text-white'>
-                Features
+              <a href='/users' className='nav-link px-2 text-white'>
+                Users
               </a>
             </li>
             <li>
