@@ -12,7 +12,6 @@ export default function Login() {
 
   const submit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(email);
 
     const result = await axios.post('login', {
       email,

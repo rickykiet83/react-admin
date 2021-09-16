@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Button } from '@material-ui/core';
 import { IProduct } from '../../models/product.model';
-import { Layout } from '../../components/Layout';
+import Layout from '../../components/Layout';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';

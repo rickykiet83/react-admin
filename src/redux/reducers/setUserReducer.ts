@@ -1,16 +1,16 @@
 import { User } from './../../models/user.model';
-const initialState = {
-  user: new User(),
-}
+// const initialState = {
+//   user: new User(),
+// }
 
-export const setUserReducer = (state = initialState, action: { type: string, user: User }) => {
+export const setUserReducer = (state = { user: new User() }, action: { type: string, user: User }) => {
 
   switch (action.type) {
     case 'SET_USER':
       return {
         ...state,
-        user: initialState.user
-      }
+        user: action.user
+      };
 
     default:
       return state;

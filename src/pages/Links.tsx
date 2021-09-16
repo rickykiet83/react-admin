@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Layout } from '../components/Layout';
+import Layout from '../components/Layout';
 import { Link } from '../models/link.model';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

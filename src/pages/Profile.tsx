@@ -1,13 +1,14 @@
-import React, { Component, SyntheticEvent } from 'react';
+import { IUser, User } from '../models/user.model';
+import React, { Component, Dispatch, SyntheticEvent } from 'react';
 
 import { FormState } from '../models/form.state';
-import { IUser } from '../models/user.model';
 import { IValues } from '../models/base.model';
-import { Layout } from '../components/Layout';
-import { RouteComponentProps } from 'react-router';
+import Layout from '../components/Layout';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { setUser } from '../redux/actions/setUserAction';
 
-export default class Profile extends Component<RouteComponentProps<any>> {
+class Profile extends Component<any> {
   state: FormState<IUser> = {
     data: {
       id: null,
@@ -19,9 +20,23 @@ export default class Profile extends Component<RouteComponentProps<any>> {
     submitSuccess: false,
   };
 
+  first_name = '';
+  last_name = '';
+  email = '';
+  password = '';
+  password_confirm = '';
+
   infoSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    await axios.put('users/info', this.state.data);
+    const response = await axios.put('users/info', {
+      first_name: this.first_name,
+      last_name: this.last_name,
+      email: this.email,
+    });
+    const user: User = response.data;
+    this.props.setUser(
+      new User(user.id, user.first_name, user.last_name, user.email)
+    );
   };
 
   passwordSubmit = async (e: SyntheticEvent) => {
@@ -46,7 +61,6 @@ export default class Profile extends Component<RouteComponentProps<any>> {
   };
 
   render() {
-    const { email } = this.state.data;
     return (
       <Layout>
         <h2>Account Information</h2>
@@ -56,28 +70,30 @@ export default class Profile extends Component<RouteComponentProps<any>> {
             <label>First Name</label>
             <input
               type='text'
-              onChange={(e) => this.handleInputChanges(e)}
               className='form-control'
               name='first_name'
+              defaultValue={(this.first_name = this.props.user.first_name)}
+              onChange={(e) => (this.first_name = e.target.value)}
             />
           </div>
           <div className='form-group'>
             <label>Last Name</label>
             <input
               type='text'
-              onChange={(e) => this.handleInputChanges(e)}
               className='form-control'
               name='last_name'
+              defaultValue={(this.last_name = this.props.user.last_name)}
+              onChange={(e) => (this.last_name = e.target.value)}
             />
           </div>
           <div className='form-group'>
             <label>Email</label>
             <input
               type='text'
-              defaultValue={email}
-              onChange={(e) => this.handleInputChanges(e)}
               className='form-control'
               name='email'
+              defaultValue={(this.email = this.props.user.email)}
+              onChange={(e) => (this.email = e.target.value)}
             />
           </div>
 
@@ -123,3 +139,12 @@ export default class Profile extends Component<RouteComponentProps<any>> {
     );
   }
 }
+
+export default connect(
+  (state: { user: User }) => ({
+    user: state.user,
+  }),
+  (dispatch: Dispatch<any>) => ({
+    setUser: (user: User) => dispatch(setUser(user)),
+  })
+)(Profile);

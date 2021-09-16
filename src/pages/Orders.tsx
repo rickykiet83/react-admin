@@ -6,7 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { IOrder } from '../models/order.model';
-import { Layout } from '../components/Layout';
+import Layout from '../components/Layout';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
 import axios from 'axios';

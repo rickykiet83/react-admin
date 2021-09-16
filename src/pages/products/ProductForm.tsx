@@ -5,7 +5,7 @@ import { Redirect, RouteComponentProps } from 'react-router';
 import { FormState } from '../../models/form.state';
 import { IProduct } from '../../models/product.model';
 import { IValues } from '../../models/base.model';
-import { Layout } from '../../components/Layout';
+import Layout from '../../components/Layout';
 import axios from 'axios';
 
 export default class ProductForm extends Component<RouteComponentProps<any>> {
