@@ -1,9 +1,9 @@
 import { User } from './../../models/user.model';
-// const initialState = {
-//   user: new User(),
-// }
+export const initialState = {
+  user: new User(),
+}
 
-export const setUserReducer = (state = { user: new User() }, action: { type: string, user: User }) => {
+export const setUserReducer = (state = initialState, action: { type: string, user: User }) => {
 
   switch (action.type) {
     case 'SET_USER':

@@ -14,7 +14,7 @@ class Profile extends Component<any> {
       id: null,
       first_name: '',
       last_name: '',
-      email: 'u1@gmail.com',
+      email: '',
       password: '',
     },
     submitSuccess: false,
@@ -39,12 +39,13 @@ class Profile extends Component<any> {
     );
   };
 
-  passwordSubmit = async (e: SyntheticEvent) => {
+  updatePassword = async (e: SyntheticEvent) => {
     e.preventDefault();
     await axios.put('users/password', {
-      password: this.state.data.password,
-      password_confirm: this.state.data.password,
+      password: this.password,
+      password_confirm: this.password_confirm,
     });
+    this.password = '';
   };
 
   private setValues = (values: IValues) => {
@@ -113,23 +114,23 @@ class Profile extends Component<any> {
             <label>Password</label>
             <input
               type='password'
-              onChange={(e) => this.handleInputChanges(e)}
               className='form-control'
               name='password'
+              onChange={(e) => (this.password = e.target.value)}
             />
           </div>
           <div className='form-group'>
             <label>Password Confirm</label>
             <input
               type='password'
-              onChange={(e) => this.handleInputChanges(e)}
               className='form-control'
               name='password_confirm'
+              onChange={(e) => (this.password_confirm = e.target.value)}
             />
           </div>
 
           <button
-            onClick={this.passwordSubmit}
+            onClick={this.updatePassword}
             className='btn btn-outline-secondary'
           >
             Save
