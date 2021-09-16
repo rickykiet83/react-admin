@@ -16,7 +16,7 @@ export default class Register extends Component {
     e.preventDefault();
     const data = this.mapToViewModel(this.state);
 
-    await axios.post('http://localhost:8000/api/admin/register', data);
+    await axios.post('register', data);
     this.setState({
       redirect: true,
     });
