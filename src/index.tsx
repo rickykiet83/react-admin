@@ -1,17 +1,24 @@
 import './index.css';
 
 import App from './App';
+import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import config from './config.json';
+import { configureStore } from './redux/configureStore';
 import reportWebVitals from './reportWebVitals';
 
 axios.defaults.baseURL = config.apiUr;
 axios.defaults.withCredentials = true;
+
+const store = configureStore();
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
